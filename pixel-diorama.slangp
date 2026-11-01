@@ -1,0 +1,90 @@
+# Pixel Diorama: a "diorama" look for SNES games (RetroArch slang preset).
+# Image-based post-processing (colour look, glow, depth haze, motion-following depth of field, vignette);
+# works with any SNES core and does not touch the game or the emulator.
+# All passes up to the glow grid are native-sized (scale_type = source); reduction results live in texel (0,0).
+shaders = 14
+
+shader0 = passes/map.slang
+scale_type0 = source
+scale0 = 1.0
+float_framebuffer0 = true
+alias0 = Mapped
+
+shader1 = passes/stats.slang
+scale_type1 = source
+scale1 = 1.0
+float_framebuffer1 = true
+alias1 = Stats
+
+shader2 = passes/haze.slang
+scale_type2 = source
+scale2 = 1.0
+float_framebuffer2 = true
+alias2 = Hazed
+
+shader3 = passes/bright.slang
+scale_type3 = source
+scale3 = 0.25
+float_framebuffer3 = true
+alias3 = Bright
+
+shader4 = passes/blur_h1.slang
+scale_type4 = source
+scale4 = 1.0
+float_framebuffer4 = true
+
+shader5 = passes/blur_v1.slang
+scale_type5 = source
+scale5 = 1.0
+float_framebuffer5 = true
+alias5 = Glow1
+
+shader6 = passes/blur_h2.slang
+scale_type6 = source
+scale6 = 1.0
+float_framebuffer6 = true
+
+shader7 = passes/blur_v2.slang
+scale_type7 = source
+scale7 = 1.0
+float_framebuffer7 = true
+alias7 = Glow2
+
+shader8 = passes/floor.slang
+scale_type8 = absolute
+scale_x8 = 1
+scale_y8 = 1
+float_framebuffer8 = true
+alias8 = Floor
+
+shader9 = passes/motion.slang
+scale_type9 = absolute
+scale_x9 = 1
+scale_y9 = 1
+float_framebuffer9 = true
+
+shader10 = passes/focus.slang
+scale_type10 = absolute
+scale_x10 = 1
+scale_y10 = 1
+float_framebuffer10 = true
+alias10 = Focus
+
+shader11 = passes/dof_h.slang
+scale_type11 = viewport
+scale11 = 1.0
+float_framebuffer11 = true
+
+shader12 = passes/dof_v.slang
+scale_type12 = viewport
+scale12 = 1.0
+float_framebuffer12 = true
+
+shader13 = passes/final.slang
+scale_type13 = viewport
+scale13 = 1.0
+
+textures = "LookLUT"
+LookLUT = luts/look.png
+LookLUT_linear = false
+LookLUT_mipmap = false
