@@ -49,23 +49,6 @@ Every setting is a slider under **Quick Menu > Shaders > Shader Parameters**.
 | Vignette strength / falloff power | 1.0 / 2.2 | Darkening toward the corners |
 | Chromatic aberration at corner | 0.0 | Colour fringing toward the corners (px at 1080p) |
 
-## How it works
-
-All passes run on the emulator's output image, so the shader works with any SNES core.
-
-1. **Colour look**: a 64×64×64 colour lookup table (`luts/look.png`). Exact black stays black.
-2. **Frame statistics**: mean colour and brightness spread of the current frame (non-black pixels only).
-3. **Glow**: pixels brighter than the frame's own threshold feed two Gaussian blurs that are added back.
-4. **Presentation floor**: per frame, colour saturation and contrast are raised back if the look would leave
-   the frame duller or flatter than the original.
-5. **Motion-following focus**: rows where the picture changes (moving characters) set the focus row; when most
-   of the screen moves (scrolling) the focus goes to the screen centre. The focus moves smoothly.
-6. **Depth of field**: blur grows with distance from the focus row. The image is enlarged with nearest-neighbour
-   sampling first, so the sharp band keeps crisp pixel edges.
-7. **Vignette** and optional chromatic aberration, then output.
-
-Cost is about 3.6 ms per frame on an RX 6800 XT.
-
 ## Known limits
 
 - The focus needs about half a second to move to a character that appears suddenly.
